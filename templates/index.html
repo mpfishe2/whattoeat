@@ -14,7 +14,7 @@
         }
         #chat {
             width: 800px;
-            height: 900px;
+            height: 700px;
             border: 1px solid #ccc;
             border-radius: 15px;
             padding: 10px;
@@ -38,16 +38,39 @@
             color: black;
             float: right;
         }
+        #titleName {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #input-area {
+            position: fixed;
+            bottom: 1%;
+            width: 33%;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
+    
     <div id="chat">
+        <h1 id="titleName">What to Eat?</h1>
         <!-- Chat messages will be appended here -->
     </div>
 
-    <input type="text" id="message" name="message" onkeypress="if (event.keyCode == 13) { sendMessage(); }">
-    <button onclick="sendMessage()">Send</button>
-    <button onclick="saveReply()">Save Reply</button>
+    <div id="input-area">
+        <input type="text" id="message" name="message" onkeypress="if (event.keyCode == 13) { sendMessage(); }">
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="saveReply()">Save Reply</button>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

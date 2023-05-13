@@ -3,7 +3,8 @@
 - Integration with document database or other service to get information for recipes, groceries, calorie count?
 
 2. Message Formatting
-- UI needs to display the responses much better
+- UI needs to display the responses much better [DONE]
+- Buttons and text area at the bottom could use work
 
 3. Recipe to Grocery
 - Need to have ability to easily mark what you already have and then save the grocery list
