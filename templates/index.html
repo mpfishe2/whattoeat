@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F0F0F0;
+        }
+        #chat {
+            width: 800px;
+            height: 900px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: white;
+            overflow-y: auto;
+        }
+        .message {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 80%;
+            clear: both;
+        }
+        .bot {
+            background-color: #0084FF;
+            color: white;
+            float: left;
+        }
+        .user {
+            background-color: #F0F0F0;
+            color: black;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat">
+        <!-- Chat messages will be appended here -->
+    </div>
+
+    <input type="text" id="message" name="message" onkeypress="if (event.keyCode == 13) { sendMessage(); }">
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="saveReply()">Save Reply</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let lastReply = '';
+        function sendMessage() {
+            const message = $('#message').val();
+            $('#chat').append('<div class="message user">' + message + '</div>');
+            $('#message').val('');
+            $.ajax({
+                url: '/api/chat',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'message': message
+                }),
+                success: function(data) {
+                    $('#chat').append('<div class="message bot">' + data + '</div>');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                    lastReply = data;
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
+
+        function saveReply() {
+            $.ajax({
+                url: '/api/save',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'message': lastReply
+                }),
+                success: function() {
+                    alert('Reply saved successfully!');
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

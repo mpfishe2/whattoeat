@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Chat</h2>
+
+    <div id="chat">
+        <!-- Chat messages will be appended here -->
+    </div>
+
+    <input type="text" id="message" name="message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function sendMessage() {
+            const message = $('#message').val();
+            $('#chat').append('<div class="message user">' + message + '</div>');
+            $('#message').val('');
+            $.ajax({
+                url: '/api/chat',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'message': message
+                }),
+                success: function(data) {
+                    $('#chat').append('<div class="message bot">' + data + '</div>');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

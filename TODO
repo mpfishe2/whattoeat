@@ -1,0 +1,10 @@
+1. User + Bot Interaction
+- LangChain integration for it to keep some sort of state during a conversation
+- Integration with document database or other service to get information for recipes, groceries, calorie count?
+
+2. Message Formatting
+- UI needs to display the responses much better
+
+3. Recipe to Grocery
+- Need to have ability to easily mark what you already have and then save the grocery list
+  - so maybe have it generate the grocery list, and have it ask the user what it already has and then finalize and send / save?
